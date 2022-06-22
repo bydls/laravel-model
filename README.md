@@ -1,2 +1,2 @@
 # laravel-model
-模式初始化
+模块初始化

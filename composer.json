@@ -1,0 +1,25 @@
+{
+    "name": "administrator/laravel-model",
+    "description": "laravel模型初始化",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "bydls\\LaravelModel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hebinghua",
+            "email": "944870269@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2",
+        "illuminate/database": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/support": "^5.0 || ^6.0|| ^7.0 || ^8.0 || ^9.0",
+        "illuminate/config": "^5.0 || ^6.0|| ^7.0 || ^8.0 || ^9.0",
+        "illuminate/console": "^5.0 || ^6.0|| ^7.0 || ^8.0 || ^9.0"
+    }
+}
