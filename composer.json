@@ -1,5 +1,5 @@
 {
-    "name": "administrator/laravel-model",
+    "name": "bydls/laravel-model",
     "description": "laravel模型初始化",
     "type": "library",
     "license": "MIT",
