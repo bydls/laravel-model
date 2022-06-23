@@ -14,7 +14,7 @@ class CustomPropertyProcessor implements ProcessorInterface
         if ($config->get('no_timestamps') === true) {
             $pNoTimestamps = new PropertyModel('timestamps', 'public', false);
             $pNoTimestamps->setDocBlock(
-                new DocBlockModel('Indicates if the model should be timestamped.', '', '@var bool')
+                new DocBlockModel('是否应为模型添加时间戳', '', '@var bool')
             );
             $model->addProperty($pNoTimestamps);
         }
@@ -30,7 +30,7 @@ class CustomPropertyProcessor implements ProcessorInterface
         if ($config->has('connection')) {
             $pConnection = new PropertyModel('connection', 'protected', $config->get('connection'));
             $pConnection->setDocBlock(
-                new DocBlockModel('The connection name for the model.', '', '@var string')
+                new DocBlockModel('与模型关联的数据库', '', '@var string')
             );
             $model->addProperty($pConnection);
         }

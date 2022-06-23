@@ -27,17 +27,20 @@ class TableNameProcessor implements ProcessorInterface
 
     public function process(EloquentModel $model, Config $config)
     {
-        $className     = $config->get('class_name');
+        $className = $config->get('class_name');
         $baseClassName = $config->get('base_class_name');
-        $tableName     = $config->get('table_name');
-
+        $tableName = $config->get('table_name');
+        if (!$className||preg_match("/[\x7f-\xff]/", $className)) {
+            $className = str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $tableName)));
+            $config->set('class_name', $className);
+        }
         $model->setName(new ClassNameModel($className, $this->helper->getShortClassName($baseClassName)));
         $model->addUses(new UseClassModel(ltrim($baseClassName, '\\')));
         $model->setTableName($tableName ?: $this->helper->getDefaultTableName($className));
 
         if ($model->getTableName() !== $this->helper->getDefaultTableName($className)) {
             $property = new PropertyModel('table', 'protected', $model->getTableName());
-            $property->setDocBlock(new DocBlockModel('The table associated with the model.', '', '@var string'));
+            $property->setDocBlock(new DocBlockModel('与模型关联的表', '', '@var string'));
             $model->addProperty($property);
         }
     }

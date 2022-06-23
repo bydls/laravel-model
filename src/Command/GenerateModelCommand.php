@@ -95,7 +95,7 @@ class GenerateModelCommand extends Command
 
         $outputPath = $this->resolveOutputPath($config);
         if ($config->get('backup') && file_exists($outputPath)) {
-            rename($outputPath, $outputPath . '~');
+            rename($outputPath, $outputPath . '.bak');
         }
         file_put_contents($outputPath, $content);
     }
@@ -135,24 +135,36 @@ class GenerateModelCommand extends Command
     protected function getArguments()
     {
         return [
-            ['class-name', InputArgument::REQUIRED, 'Model class name'],
+            //   ['class-name', InputArgument::REQUIRED, 'Model class name'],
         ];
     }
 
     /**
      * @return array
      */
+//    protected function getOptions()
+//    {
+//        return [
+//            ['table-name', 'tn', InputOption::VALUE_OPTIONAL, 'Name of the table to use', null],
+//            ['output-path', 'op', InputOption::VALUE_OPTIONAL, 'Directory to store generated model', null],
+//            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Namespace of the model', null],
+//            ['base-class-name', 'bc', InputOption::VALUE_OPTIONAL, 'Model parent class', null],
+//            ['no-timestamps', 'ts', InputOption::VALUE_NONE, 'Set timestamps property to false', null],
+//            ['date-format', 'df', InputOption::VALUE_OPTIONAL, 'dateFormat property', null],
+//            ['connection', 'cn', InputOption::VALUE_OPTIONAL, 'Connection property', null],
+//            ['backup', 'b', InputOption::VALUE_NONE, 'Backup existing model', null]
+//        ];
+//    }
     protected function getOptions()
     {
         return [
-            ['table-name', 'tn', InputOption::VALUE_OPTIONAL, 'Name of the table to use', null],
-            ['output-path', 'op', InputOption::VALUE_OPTIONAL, 'Directory to store generated model', null],
-            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Namespace of the model', null],
-            ['base-class-name', 'bc', InputOption::VALUE_OPTIONAL, 'Model parent class', null],
-            ['no-timestamps', 'ts', InputOption::VALUE_NONE, 'Set timestamps property to false', null],
-            ['date-format', 'df', InputOption::VALUE_OPTIONAL, 'dateFormat property', null],
-            ['connection', 'cn', InputOption::VALUE_OPTIONAL, 'Connection property', null],
-            ['backup', 'b', InputOption::VALUE_NONE, 'Backup existing model', null]
+            ['table-name', null, InputOption::VALUE_OPTIONAL, '表名称', null],
+            ['class-name', null, InputOption::VALUE_OPTIONAL, '类名称', '表名称的驼峰写法'],
+            ['output-path', null, InputOption::VALUE_OPTIONAL, '生成文件地址,相对路径', './Models'],
+            ['namespace', null, InputOption::VALUE_OPTIONAL, '命名空间', 'App\Models'],
+            ['no-timestamps', null, InputOption::VALUE_OPTIONAL, '将timestamps属性设置为false', true],
+            ['connection', null, InputOption::VALUE_OPTIONAL, '连接的数据库', null],
+            ['backup', null, InputOption::VALUE_NONE, '是否备份源文件,默认不备份', null]
         ];
     }
 }

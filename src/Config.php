@@ -25,13 +25,23 @@ class Config
     }
 
     /**
-     * @param string     $key
+     * @param string $key
      * @param mixed|null $default
      * @return mixed|null
      */
     public function get($key, $default = null)
     {
         return $this->has($key) ? $this->config[$key] : $default;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return mixed|null
+     */
+    public function set($key, $value)
+    {
+        return $this->config[$key] = $value;
     }
 
     /**
@@ -50,8 +60,7 @@ class Config
      */
     protected function merge(array $high, array $low)
     {
-        foreach ($high as $key => $value)
-        {
+        foreach ($high as $key => $value) {
             if ($value !== null) {
                 $low[$key] = $value;
             }
