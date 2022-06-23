@@ -8,6 +8,7 @@ use bydls\LaravelModel\Config;
 use bydls\LaravelModel\Exception\GeneratorException;
 use bydls\LaravelModel\Generator;
 use bydls\LaravelModel\Model\EloquentModel;
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -16,7 +17,7 @@ class GenerateModelCommand extends Command
     /**
      * @var string
      */
-    protected $name = 'bydls:laravel:model';
+    protected $name = 'bydls:laravel-model';
 
     /**
      * @var Generator
@@ -160,6 +161,7 @@ class GenerateModelCommand extends Command
         return [
             ['table-name', null, InputOption::VALUE_OPTIONAL, '表名称', null],
             ['class-name', null, InputOption::VALUE_OPTIONAL, '类名称', '表名称的驼峰写法'],
+            ['base-class-name', null, InputOption::VALUE_OPTIONAL, '继承的基类名称', 'Model'],
             ['output-path', null, InputOption::VALUE_OPTIONAL, '生成文件地址,相对路径', './Models'],
             ['namespace', null, InputOption::VALUE_OPTIONAL, '命名空间', 'App\Models'],
             ['no-timestamps', null, InputOption::VALUE_OPTIONAL, '将timestamps属性设置为false', true],
